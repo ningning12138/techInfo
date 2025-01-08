@@ -1,0 +1,5 @@
+name: Task Management
+
+on:
+  issues:
+    types: [opened]
