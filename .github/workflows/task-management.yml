@@ -1,33 +1,25 @@
-# This is a basic workflow to help you get started with Actions
+name: Auto Label and Add to Project
 
-name: Task Management
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   issues:
     types: [opened]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-   manage-task:
+  auto-label:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Add label to issue
         uses: actions/labeler@v3
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          configuration-path: .github/workflows/task-management.yml
 
-      # Runs a single command using the runners shell
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
       - name: Add issue to project
         uses: actions/add-to-project@v1
         with:
-          project: "https://github.com/users/ningning12138/projects/1"
+          project-url: https://github.com/users/ningning12138/projects/1
           column-name: Todo
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labeled: bug, enhancement
