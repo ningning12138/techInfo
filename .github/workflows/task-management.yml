@@ -18,13 +18,17 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Add label to issue
-        uses: wang@v1
+        uses: actions/labeler@v3
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           configuration-path: .github/workflows/task-management.yml
 
       # Runs a single command using the runners shell
       - name: Add issue to project
-        uses: wang@v1
+        uses: actions/add-to-project@v1
         with:
           project: "https://github.com/users/ningning12138/projects/1"
+          column-name: Todo
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labeled: bug, enhancement
+          label-operator: OR
